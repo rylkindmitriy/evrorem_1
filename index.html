@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Evrorem</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/price-range.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">  
+	<link rel="shortcut icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" type="text/css" media="all" href="fancybox/jquery.fancybox.css">
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="fancybox/jquery.fancybox.js"></script>
+	 <script type="text/javascript" src="js/jquery.maskedinput.js"></script>
+	 <script type="text/javascript">
+	jQuery(function($){
+	   $("#phone").mask("+7 (999) 999-9999");
+	   $("#phone2").mask("+7 (999) 999-9999");
+	});
+	</script>
+
+</head><!--/head-->
+
+<body>
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="tel:+79779816237"><i class="fa fa-phone"></i> +79779816237</a></li>
+								<li><a href="mailto:euro-rem@mail.ru"><i class="fa fa-envelope"></i>euro-rem@mail.ru</a></li>
+							</ul>
+						</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="index.html"><img src="#" alt="logo" /></a>
+						</div>
+					</div>
+				</div>
+
+					<div class="col-sm-8" >
+						<div class="shop-menu pull-right">
+							<a href="#inline" class="modalbox">Обратный звонок</a>
+							<div id="inline">
+							<h2>Онлайн заявка</h2>
+							<form id="contact" name="contact" action="#" method="post">
+								<input type="name" id="name" name="name" class="txt" placeholder="Ваше имя">
+								<input type="phone" id="phone" name="phone" class="txt" placeholder="Ваш телефон">
+								<input type="email" id="email" name="email" class="txt" placeholder="Ваш e-mail"> 
+								<textarea id="msg" name="msg" class="txtarea"  placeholder="Ваше сообщение:"></textarea>
+								<button id="send">Отправить</button>
+							</form>
+							</div>
+						</div>
+						<script type="text/javascript">
+							function validateEmail(email) { 
+							  var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+							  return reg.test(email);
+							}
+						  
+							$(document).ready(function() {
+							  $(".modalbox").fancybox();
+							  $("#contact").submit(function() { return false; });
+							  $("#send").on("click", function(){
+								var emailval  = $("#email").val();
+								var namevl  = $("#name").val();
+								var phonevl  = $("#phone").val();
+								var msgval    = $("#msg").val();
+								var msglen    = msgval.length;
+								var mailvalid = validateEmail(emailval);
+						  
+								if(mailvalid == false) {
+								  $("#email").addClass("error");
+								}
+								else if(mailvalid == true){
+								  $("#email").removeClass("error");
+								}
+							if(mailvalid == false) {
+								  $("#name").addClass("error");
+								}
+								else if(mailvalid == true){
+								  $("#name").removeClass("error");
+								}
+								if(mailvalid == false) {
+								  $("#phone").addClass("error");
+								}
+								else if(mailvalid == true){
+								  $("#phone").removeClass("error");
+								}
+								if(msglen < 4) {
+								  $("#msg").addClass("error");
+								}
+								else if(msglen >= 4){
+								  $("#msg").removeClass("error");
+								}
+								
+								if(mailvalid == true && msglen >= 4) {
+								  // если обе проверки пройдены
+								  // сначала мы скрываем кнопку отправки
+								  $("#send").replaceWith("<em>отправка...</em>");
+								  $.ajax({
+									type: 'POST',
+									url: 'sendmessage.php',
+									data: $("#contact").serialize(),
+									success: function(data) {
+									  if(data == "true") {
+										$("#contact").fadeOut("fast", function(){
+										  $(this).before("<p><strong>Успешно! Ваше сообщение отправлено  :)</strong></p>");
+										  setTimeout("$.fancybox.close()", 1000);
+										});
+									  }
+									}
+								  });
+								}
+							  });
+							});
+						  </script>
+					</div>
+			</div>
+		</div><!--/header-middle-->
+	
+	</header><!--/header-->
+	
+	
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Категории</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#mitrix">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Митрикс
+										</a>
+									</h4>
+								</div>
+								<div id="mitrix" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li><a href="mitrix.html">Описание </a></li>
+											<li><a href="#">Рассчет </a></li>
+
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="#"></a></h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="#">Кейс</a></h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="#">Холдер</a></h4>
+								</div>
+							
+						</div><!--/category-products-->
+					
+					</div>
+				</div>
+				
+
+					
+				
+				
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+		
+
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2021 Evrorem . All rights reserved.</p>
+	
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+	
+
+  
+    <script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.scrollUp.min.js"></script>
+	<script src="js/price-range.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
