@@ -198,7 +198,7 @@
 			  $("#send").replaceWith("<em>отправка...</em>");
 			  $.ajax({
 				type: 'POST',
-				url: 'sendmessage.php',
+				url: 'https://rylkindmitriy.github.io/evrorem_1/sendmessage.php',
 				data: $("#contact").serialize(),
 				success: function(data) {
 				  if(data == "true") {
